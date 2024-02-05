@@ -1,27 +1,27 @@
-# 
-
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 import time
 
-# Initialize the WebDriver (assuming Chrome)
-driver = webdriver.Chrome()
 
-# Navigate to the page
+options = Options()
+options.headless = True  
+options.add_argument("--window-size=1920,1080")  
+
+
+driver = webdriver.Chrome(options=options)
+
+
 driver.get("https://bookings.better.org.uk/location/charlton-lido/swim-doctor/2024-02-05/by-time/class/45867687")
 
-# Optionally, wait a few seconds to ensure the page has fully loaded
-# Adjust the sleep time based on your network speed and the page's complexity
-time.sleep(5)  # Waits for 5 seconds
 
-# Retrieve the full HTML content of the page
+time.sleep(5)  
+
+
 html_content = driver.page_source
 
 # Close the WebDriver
 driver.quit()
 
-# Print the HTML content
-print(html_content)
 
-# Save the HTML content to a text file
-with open("/Users/rickthompson/projects/swim_lessons/page_source.txt", "w", encoding="utf-8") as file:
+with open("page_source.txt", "w", encoding="utf-8") as file:
     file.write(html_content)
